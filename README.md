@@ -4,7 +4,7 @@
 Uma aplicação NodeJS criada para o Desafío #1 do Bootcamp GoStack onde é possivel Criar, Listar, Deletar e Atualizar repositórios no momento da aplicação sem persistência de Dados
 
 ## Features
-- :memo: Criar um novo repositórios
+- :memo: Criar um novo repositório
 - :memo: Listar todos os repositórios
 - :memo: Deletar um repositório pelo ID
 - :memo: Atualizar os dados de um repositório
