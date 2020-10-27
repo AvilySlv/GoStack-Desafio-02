@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
-// const { v4: uuid } = require('uuid');
+const { uuid } = require('uuidv4');
 
 const app = express();
 
@@ -11,23 +10,75 @@ app.use(cors());
 const repositories = [];
 
 app.get("/repositories", (request, response) => {
-  // TODO
+  return response.status(200).json(repositories);
 });
 
 app.post("/repositories", (request, response) => {
-  // TODO
+  const { title, url, techs } = request.body;
+
+  const repo = { id: uuid(), title, url, techs, likes: 0 };
+
+  repositories.push(repo);
+
+  return response.status(201).json(repo);
 });
 
 app.put("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.params;
+
+  const repoIndex = repositories.findIndex(repo => repo.id == id);
+
+  if(repoIndex < 0) {
+    return response.status(400).json({
+      error: 'Repository not found.'
+    });
+  }
+
+  const { title, url, techs } = request.body;
+
+  const repo = { 
+    id, 
+    title, 
+    url, 
+    techs,
+    likes: repositories[repoIndex].likes
+  };
+
+  repositories[repoIndex] = repo;
+
+  return response.status(201).json(repo);
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.params;
+
+  const repoIndex = repositories.findIndex(repo => repo.id == id);
+
+  if(repoIndex < 0) {
+    return response.status(400).json({
+      error: 'Repository not found to delete.'
+    });
+  }
+
+  repositories.splice(repoIndex, 1);
+
+  return response.status(204).json();
 });
 
 app.post("/repositories/:id/like", (request, response) => {
-  // TODO
+  const { id } = request.params;
+
+  const repoIndex = repositories.findIndex(repo => repo.id == id);
+
+  if(repoIndex < 0) {
+    return response.status(400).json({
+      error: 'Repository not found to like'
+    });
+  }
+
+  repositories[repoIndex].likes += 1;
+
+  return response.status(200).json({ likes: repositories[repoIndex].likes });
 });
 
 module.exports = app;
