@@ -1,4 +1,4 @@
-# :green_book: GoStack - Desafío #02 :rocket:
+# :green_book: GoStack - Desafio #02 :rocket:
 
 ## Descrição
 Uma aplicação NodeJS criada para o Desafío #1 do Bootcamp GoStack onde é possivel Criar, Listar, Deletar e Atualizar repositórios no momento da aplicação sem persistência de Dados
